@@ -328,6 +328,7 @@ namespace ClassicUO.Network
             Handler.Add(0xF5, DisplayMap);
             Handler.Add(0xF6, BoatMoving);
             Handler.Add(0xF7, PacketList);
+            Handler.Add(0x8B, OnSignGumpReceived);
 
             // login
             Handler.Add(0xA8, ServerListReceived);
@@ -338,6 +339,27 @@ namespace ClassicUO.Network
             Handler.Add(0x85, ReceiveLoginRejection);
             Handler.Add(0x53, ReceiveLoginRejection);
             Handler.Add(0xFD, LoginDelay);
+        }
+
+        // Define the handler in PacketHandlers.cs
+        private static void OnSignGumpReceived(World world, ref StackDataReader p)
+        {
+            // Step 1: Read the Object UID (4 bytes)
+            uint objectID = p.ReadUInt32BE();
+
+            // Read gumpType as an int
+            ushort gumpType = p.ReadUInt16BE(); // or ReadUInt16BE() depending on the server's byte order
+
+            // Step 3: Read the Unknown Text field
+            ushort unknownLength = p.ReadUInt16LE();
+            string unknownText = unknownLength > 0 ? p.ReadASCII(unknownLength - 1) : string.Empty;
+
+            // Step 4: Read the Main Gump Text field
+            ushort textLength = p.ReadUInt16LE();
+            string gumpText = textLength > 0 ? p.ReadASCII(textLength - 1) : string.Empty;
+
+            // Step 5: Create and display the gump
+            UIManager.Add(new SignGump(world, objectID, gumpType, unknownText, gumpText)); // Pass world here
         }
 
         public static void SendMegaClilocRequests(World world)

@@ -214,17 +214,19 @@ namespace ClassicUO.Game.Data
         Sparks,
         Swarm,
         BoneBreaker,
-        Unknown2,
+        Sparks2,
         SwarmImmune,
         BoneBreakerImmune,
-        UnknownGoblin,
-        UnknownRedDrop,
-        UnknownStar,
+        StatueTransform,
+        CorasMarage,
+        VirtueShield,
         FeintDebuff,
         CaddelliteInfused,
         PotionGloriousFortune,
         MysticalPolymorphTotem,
-        UnknownDebuff,
+        DiscordanceDebuff,
+        ChaliceOfPilferingProtection,
+        BattleLust,
     }
 
     internal static class BuffTable
@@ -451,6 +453,7 @@ namespace ClassicUO.Game.Data
             0xC34B,
             0xC34A,
             0xC343,
+            0xC344,
             0xC345,
             0xC346,
             0xC347,
@@ -464,9 +467,9 @@ namespace ClassicUO.Game.Data
             0x5DE5,
             0x5DE4,
             0x5DE6,
-            0x5D51,
-
-            0x0951
+            0x0951,
+            0xC342,
+            0x7619
         };
     }
 }
